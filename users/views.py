@@ -20,7 +20,7 @@ def login(request):
     password = request.POST.get('password')
     # response = {}
     if request.method == "POST":
-        user = users.objects.filter(UserName__exact=username , Password__exact=password)
+        user = users.objects.filter(username__exact=username , password__exact=password)
         if user:
             # response['list'] = json.loads(serializers.serialize("json", user))
             cookie = {}
