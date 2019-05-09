@@ -9,7 +9,8 @@ class users(models.Model):
     company_code = models.CharField(max_length=20,null= True ,blank=True)
     company_name = models.CharField(max_length=20,null= True ,blank=True)
     position = models.CharField(max_length=20 ,null= True ,blank=True)
+    entrytime = models.DateField(null= True ,blank=True)                   #入职时间
     email = models.CharField(max_length=20 ,null= True ,blank=True)
     telephone = models.CharField(max_length=20 ,null= True ,blank=True)
-    username = models.CharField(max_length=20)
+    # username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)

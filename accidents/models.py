@@ -18,15 +18,15 @@ from django.db import models
 #         accident.description = description
 #         accident.save()
 
-class ranks(models.Model):
+class rank1(models.Model):
     code = models.CharField(max_length=10)
     name = models.CharField(max_length=20)
 
-class types(models.Model):
+class type1(models.Model):
     code = models.CharField(max_length=10)
     name = models.CharField(max_length=20)
 
-class lists(models.Model):
+class list1(models.Model):
     name = models.CharField(max_length=20,null= True , blank= True)
     address = models.CharField(max_length=20,null= True , blank= True)
     company_code = models.CharField(max_length=20,null= True , blank= True)

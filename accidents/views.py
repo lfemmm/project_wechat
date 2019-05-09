@@ -6,14 +6,62 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.utils import json
 
-from accidents.models import lists, types, ranks
-
+from accidents.models import list1, type1, rank1
 
 @api_view(['GET'])
 def accidentslist(request):
     accidents_list = {}
     if request.method =='GET':
-        data = lists.objects.all()
+        type_code = request.GET.get('type_code')
+        rank_code = request.GET.get('rank_code')
+        startdate = request.GET.get('startdate')
+        enddate = request.GET.get('enddate')
+        if type_code == None:
+            if rank_code == None:
+                if startdate == None:
+                    if enddate == None:
+                        data = list1.objects.all()
+                    else:
+                        data = list1.objects.filter(date__lte=enddate)
+                else:
+                    if enddate == None:
+                        data = list1.objects.filter(date__gte=startdate)
+                    else:
+                        data = list1.objects.filter(date__gte=startdate, date__lte=enddate)
+            else:
+                if startdate == None:
+                    if enddate == None:
+                        data = list1.objects.filter(rank_code__exact=rank_code)
+                    else:
+                        data = list1.objects.filter(rank_code__exact=rank_code,date__lte=enddate)
+                else:
+                    if enddate == None:
+                        data = list1.objects.filter(rank_code__exact=rank_code,date__gte=startdate)
+                    else:
+                        data = list1.objects.filter(rank_code__exact=rank_code,date__gte=startdate, date__lte=enddate)
+        else:
+            if rank_code == None:
+                if startdate == None:
+                    if enddate == None:
+                        data = list1.objects.filter(type_code__exact=type_code)
+                    else:
+                        data = list1.objects.filter(type_code__exact=type_code, date__lte=enddate)
+                else:
+                    if enddate == None:
+                        data = list1.objects.filter(type_code__exact=type_code, date__gte=startdate)
+                    else:
+                        data = list1.objects.filter(type_code__exact=type_code, date__gte=startdate, date__lte=enddate)
+            else:
+                if startdate == None:
+                    if enddate == None:
+                        data = list1.objects.filter(type_code__exact=type_code,rank_code__exact=rank_code)
+                    else:
+                        data = list1.objects.filter(type_code__exact=type_code,rank_code__exact=rank_code, date__lte=enddate)
+                else:
+                    if enddate == None:
+                        data = list1.objects.filter(type_code__exact=type_code,rank_code__exact=rank_code, date__gte=startdate)
+                    else:
+                        data = list1.objects.filter(type_code__exact=type_code,rank_code__exact=rank_code, date__gte=startdate, date__lte=enddate)
         paginator = Paginator(data, 10)
         page = request.GET.get('page')
         try:
@@ -31,7 +79,7 @@ def accidentslist(request):
         accidents_list['page'] = request.GET.get('page')
     else:
         accidents_list['page'] = 1
-    total = lists.objects.all().count()
+    total = len(data)
     accidents_list['accidents_total'] = total
     accidents_list['list'] = json.loads(serializers.serialize("json", data))
     return JsonResponse(accidents_list)
@@ -39,7 +87,7 @@ def accidentslist(request):
 @api_view(['GET'])
 def accidentdetail(request,id):
     accident_detail = {}
-    data = lists.objects.filter(pk = id)
+    data = list1.objects.filter(pk = id)
     accident_detail['list'] = json.loads(serializers.serialize("json", data))
     return JsonResponse(accident_detail)
 
@@ -47,7 +95,7 @@ def accidentdetail(request,id):
 def addaccident(request):
     if request.method == 'POST':
         if request.POST != '':
-            accident = lists()
+            accident = list1()
             accident.name = request.POST.get('name')
             accident.address = request.POST.get('address')
             accident.company_code = request.POST.get('company_code')
@@ -71,7 +119,7 @@ def addaccident(request):
 def typeslist(request):
     types_list = {}
     if request.method == 'GET':
-        data = types.objects.all()
+        data = type1.objects.all()
     types_list['list'] = json.loads(serializers.serialize("json", data))
     return JsonResponse(types_list)
 
@@ -79,6 +127,6 @@ def typeslist(request):
 def rankslist(request):
     ranks_list = {}
     if request.method == 'GET':
-        data = ranks.objects.all()
+        data = rank1.objects.all()
     ranks_list['list'] = json.loads(serializers.serialize("json", data))
     return JsonResponse(ranks_list)

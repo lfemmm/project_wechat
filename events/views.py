@@ -7,14 +7,38 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.utils import json
 
-from events.models import lists, types
+from events.models import list2, type2
 
 
 @api_view(['GET'])
 def eventslist(request):
     events_list = {}
     if request.method =='GET':
-        data = lists.objects.all()
+        type_code = request.GET.get('type_code')
+        startdate = request.GET.get('startdate')
+        enddate = request.GET.get('enddate')
+        if type_code ==None:
+            if startdate == None:
+                if enddate == None:
+                    data = list2.objects.all()
+                else:
+                    data = list2.objects.filter(date__lte = enddate)
+            else:
+                if enddate == None:
+                    data = list2.objects.filter(date__gte=startdate)
+                else:
+                    data = list2.objects.filter(date__gte=startdate,date__lte = enddate)
+        else:
+            if startdate == None:
+                if enddate == None:
+                    data = list2.objects.filter(type_code__exact=type_code)
+                else:
+                    data = list2.objects.filter(type_code__exact=type_code,date__lte=enddate)
+            else:
+                if enddate == None:
+                    data = list2.objects.filter(type_code__exact=type_code,date__gte=startdate)
+                else:
+                    data = list2.objects.filter(type_code__exact=type_code,date__gte=startdate, date__lte=enddate)
         paginator = Paginator(data, 10)
         page = request.GET.get('page')
         try:
@@ -32,7 +56,7 @@ def eventslist(request):
         events_list['page'] = request.GET.get('page')
     else:
         events_list['page'] = 1
-    total = lists.objects.all().count()
+    total = len(data)
     events_list['events_total'] = total
     events_list['list'] = json.loads(serializers.serialize("json", data))
     return JsonResponse(events_list)
@@ -40,7 +64,7 @@ def eventslist(request):
 @api_view(['GET'])
 def eventdetail(request,id):
     event_detail = {}
-    data = lists.objects.filter(pk = id)
+    data = list2.objects.filter(pk = id)
     event_detail['list'] = json.loads(serializers.serialize("json", data))
     return JsonResponse(event_detail)
 # @api_view(['GET'])
@@ -54,7 +78,7 @@ def eventdetail(request,id):
 def addevent(request):
     if request.method == 'POST':
         if request.POST != '':
-            event = lists()
+            event = list2()
             event.name = request.POST.get('name')
             event.address = request.POST.get('address')
             event.company_code = request.POST.get('company_code')
@@ -74,6 +98,6 @@ def addevent(request):
 def typeslist(request):
     types_list = {}
     if request.method == 'GET':
-        data = types.objects.all()
+        data = type2.objects.all()
     types_list['list'] = json.loads(serializers.serialize("json", data))
     return JsonResponse(types_list)

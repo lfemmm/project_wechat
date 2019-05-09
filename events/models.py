@@ -1,11 +1,11 @@
 from django.db import models
 
 # Create your models here.
-class types(models.Model):
+class type2(models.Model):
     code = models.CharField(max_length=10)
     name = models.CharField(max_length=20)
 
-class lists(models.Model):
+class list2(models.Model):
     name = models.CharField(max_length=20,null= True , blank= True)
     address = models.CharField(max_length=20,null= True , blank= True)
     company_code = models.CharField(max_length=20,null= True , blank= True)
