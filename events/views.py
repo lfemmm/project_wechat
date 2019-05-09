@@ -7,7 +7,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.utils import json
 
-from events.models import lists
+from events.models import lists, types
 
 
 @api_view(['GET'])
@@ -50,5 +50,30 @@ def eventdetail(request,id):
 #     event_detail['list'] = json.loads(serializers.serialize("json", data))
 #     return JsonResponse(event_detail)
 
+@api_view(['POST']) #新增事故
 def addevent(request):
-    return None
+    if request.method == 'POST':
+        if request.POST != '':
+            event = lists()
+            event.name = request.POST.get('name')
+            event.address = request.POST.get('address')
+            event.company_code = request.POST.get('company_code')
+            event.company_name = request.POST.get('company_name')
+            event.type_code = request.POST.get('type_code')
+            event.type_name = request.POST.get('type_name')
+            event.date = request.POST.get('date')
+            event.description = request.POST.get('description')
+            event.save()
+            return HttpResponse('新增成功！')
+        else:
+            return HttpResponse('新增失败！')
+    else:
+        return HttpResponse('新增失败！')
+
+@api_view(['GET'])  #查询事件类别
+def typeslist(request):
+    types_list = {}
+    if request.method == 'GET':
+        data = types.objects.all()
+    types_list['list'] = json.loads(serializers.serialize("json", data))
+    return JsonResponse(types_list)

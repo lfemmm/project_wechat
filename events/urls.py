@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^eventslist/$', views.eventslist),
     url(r'^eventdetail/(?P<id>\d+)/$', views.eventdetail),
     # url(r'^eventdetail/$', views.eventdetail),
+    url(r'^types/$', views.typeslist),
 ]
