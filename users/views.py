@@ -55,6 +55,7 @@ def userinformation(request):
     if code:
         information = {}
         information['data'] = json.loads(serializers.serialize("json", users.objects.filter(code__exact=code)))
+        # information['data'] = json.loads(str(users.objects.filter(code__exact=code).values('name', 'password')))
         return JsonResponse(information)
     else:
         return HttpResponse('请重新登录！')
