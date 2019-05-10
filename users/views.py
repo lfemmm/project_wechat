@@ -50,8 +50,8 @@ def logout(request):
 @api_view(['GET'])
 def userinformation(request):
     #登录时，应用员工编码加密码，不应该使用用户名
-    # code = request.session.get('code','')
-    code = '201822000366'
+    code = request.session.get('code','')
+    # code = '201822000366'
     if code:
         information = {}
         information['data'] = json.loads(serializers.serialize("json", users.objects.filter(code__exact=code)))
