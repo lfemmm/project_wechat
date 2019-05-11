@@ -35,7 +35,6 @@ def accident_echart(request):
         accidents_pie.count = list1.objects.filter(type_name__exact=t.name, company_code__startswith =companycode,
                                                    date__gte=startdate,date__lte=enddate).count()
         pie.append(accidents_pie)
-
 #获取柱状图数据
     # barcompanycode = request.GET.get('companycode','00')
     bar = []
