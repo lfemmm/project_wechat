@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'company',
     'events',
     'users',
-    'echart'
+    'data_analysis'
 ]
 
 MIDDLEWARE = [
