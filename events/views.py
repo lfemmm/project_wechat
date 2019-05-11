@@ -14,31 +14,10 @@ from events.models import list2, type2
 def eventslist(request):
     events_list = {}
     if request.method =='GET':
-        type_code = request.GET.get('type_code')
-        startdate = request.GET.get('startdate')
-        enddate = request.GET.get('enddate')
-        if type_code ==None:
-            if startdate == None:
-                if enddate == None:
-                    data = list2.objects.all()
-                else:
-                    data = list2.objects.filter(date__lte = enddate)
-            else:
-                if enddate == None:
-                    data = list2.objects.filter(date__gte=startdate)
-                else:
-                    data = list2.objects.filter(date__gte=startdate,date__lte = enddate)
-        else:
-            if startdate == None:
-                if enddate == None:
-                    data = list2.objects.filter(type_code__exact=type_code)
-                else:
-                    data = list2.objects.filter(type_code__exact=type_code,date__lte=enddate)
-            else:
-                if enddate == None:
-                    data = list2.objects.filter(type_code__exact=type_code,date__gte=startdate)
-                else:
-                    data = list2.objects.filter(type_code__exact=type_code,date__gte=startdate, date__lte=enddate)
+        type_code = request.GET.get('type_code', '00')
+        startdate = request.GET.get('startdate', '1900-01-01')
+        enddate = request.GET.get('enddate', '3099-01-01')
+        data = list2.objects.filter(type_code__startswith=type_code, date__gte=startdate, date__lte=enddate)
         paginator = Paginator(data, 10)
         page = request.GET.get('page')
         try:
@@ -70,7 +49,7 @@ def eventdetail(request,id):
 # @api_view(['GET'])
 # def eventdetail(request):
 #     event_detail = {}
-#     data = lists.objects.filter(pk = request.GET.get('id'))
+#     data = list2.objects.filter(pk = request.GET.get('id'))
 #     event_detail['list'] = json.loads(serializers.serialize("json", data))
 #     return JsonResponse(event_detail)
 

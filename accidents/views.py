@@ -12,56 +12,12 @@ from accidents.models import list1, type1, rank1
 def accidentslist(request):
     accidents_list = {}
     if request.method =='GET':
-        type_code = request.GET.get('type_code')
-        rank_code = request.GET.get('rank_code')
-        startdate = request.GET.get('startdate')
-        enddate = request.GET.get('enddate')
-        if type_code == None:
-            if rank_code == None:
-                if startdate == None:
-                    if enddate == None:
-                        data = list1.objects.all()
-                    else:
-                        data = list1.objects.filter(date__lte=enddate)
-                else:
-                    if enddate == None:
-                        data = list1.objects.filter(date__gte=startdate)
-                    else:
-                        data = list1.objects.filter(date__gte=startdate, date__lte=enddate)
-            else:
-                if startdate == None:
-                    if enddate == None:
-                        data = list1.objects.filter(rank_code__exact=rank_code)
-                    else:
-                        data = list1.objects.filter(rank_code__exact=rank_code,date__lte=enddate)
-                else:
-                    if enddate == None:
-                        data = list1.objects.filter(rank_code__exact=rank_code,date__gte=startdate)
-                    else:
-                        data = list1.objects.filter(rank_code__exact=rank_code,date__gte=startdate, date__lte=enddate)
-        else:
-            if rank_code == None:
-                if startdate == None:
-                    if enddate == None:
-                        data = list1.objects.filter(type_code__exact=type_code)
-                    else:
-                        data = list1.objects.filter(type_code__exact=type_code, date__lte=enddate)
-                else:
-                    if enddate == None:
-                        data = list1.objects.filter(type_code__exact=type_code, date__gte=startdate)
-                    else:
-                        data = list1.objects.filter(type_code__exact=type_code, date__gte=startdate, date__lte=enddate)
-            else:
-                if startdate == None:
-                    if enddate == None:
-                        data = list1.objects.filter(type_code__exact=type_code,rank_code__exact=rank_code)
-                    else:
-                        data = list1.objects.filter(type_code__exact=type_code,rank_code__exact=rank_code, date__lte=enddate)
-                else:
-                    if enddate == None:
-                        data = list1.objects.filter(type_code__exact=type_code,rank_code__exact=rank_code, date__gte=startdate)
-                    else:
-                        data = list1.objects.filter(type_code__exact=type_code,rank_code__exact=rank_code, date__gte=startdate, date__lte=enddate)
+        type_code = request.GET.get('type_code','00')
+        rank_code = request.GET.get('rank_code','00')
+        startdate = request.GET.get('startdate','1900-01-01')
+        enddate = request.GET.get('enddate','3099-01-01')
+        data = list1.objects.filter(type_code__startswith=type_code, rank_code__startswith=rank_code,
+                                    date__gte=startdate,date__lte=enddate)
         paginator = Paginator(data, 10)
         page = request.GET.get('page')
         try:

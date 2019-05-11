@@ -1,3 +1,4 @@
+
 from django.core import serializers
 from django.db.models import Q
 from django.http import JsonResponse
@@ -6,10 +7,10 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.utils import json
 
-from accidents.models import list1
+from accidents.models import list1, type1
 from company.models import company
 from data_analysis.models import accident_pie, accident_bar, event_pie, event_bar
-from events.models import list2
+from events.models import list2, type2
 
 
 @api_view(['GET'])  #传开始时间、结束时间、事故单位，统计各类别事故
@@ -20,20 +21,18 @@ def accident_echart(request):
     data = {}
 #获取饼状图数据
     pie = []
-    typelist =[]
-    accidents = list1.objects.all()
-    for a in accidents:
-        typelist.append(a.type_name)
-    typelist = list(set(typelist))
-    for t in typelist:
+    # typelist =[]
+    #accidents = list1.objects.all()
+    # for a in accidents:
+    #     typelist.append(a.type_name)
+    # typelist = list(set(typelist))
+    # for t in typelist:
+    accidents = type1.objects.all()
+    for t in accidents:
         accidents_pie = accident_pie()
-        accidents_pie.type_name = t
-        # if piecompanycode == None:
-        #     accidents_pie.count = list1.objects.filter(type_name__exact=t, date__gte=startdate,
-        #                                                date__lte=enddate).count()
-        #     pie.append(accidents_pie)
-        # else:
-        accidents_pie.count = list1.objects.filter(type_name__exact=t, company_code__startswith =companycode,
+        # accidents_pie.type_name = t
+        accidents_pie.type_name = t.name
+        accidents_pie.count = list1.objects.filter(type_name__exact=t.name, company_code__startswith =companycode,
                                                    date__gte=startdate,date__lte=enddate).count()
         pie.append(accidents_pie)
 
@@ -60,16 +59,18 @@ def event_echart(request):
     data = {}
     # 获取饼状图数据
     pie = []
-    typelist = []
-    events = list2.objects.all()
-    for a in events:
-        typelist.append(a.type_name)
-    typelist = list(set(typelist))
-    print(typelist)
-    for t in typelist:
+    # typelist = []
+    # events = list2.objects.all()
+    # for a in events:
+    #     typelist.append(a.type_name)
+    # typelist = list(set(typelist))
+    # for t in typelist:
+    events = type2.objects.all()
+    for t in events:
         events_pie = event_pie()
-        events_pie.type_name = t
-        events_pie.count = list2.objects.filter(type_name__exact=t, company_code__startswith=companycode,
+        # events_pie.type_name = t
+        events_pie.type_name = t.name
+        events_pie.count = list2.objects.filter(type_name__exact=t.name, company_code__startswith=companycode,
                                                    date__gte=startdate,date__lte=enddate).count()
         pie.append(events_pie)
 

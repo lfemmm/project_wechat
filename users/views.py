@@ -26,7 +26,7 @@ def login(request):
             # response.set_cookie('password', password,36000)
             request.session['code'] = code
             # response['cookie'] = json.loads(serializers.serialize("json", cookie))
-            return HttpResponse(request.session['code'])
+            return HttpResponse('success')
         else:
             messages.add_message(request,messages.WARNING,'用户名或密码错误')
     else:
