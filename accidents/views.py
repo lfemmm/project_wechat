@@ -41,9 +41,9 @@ def accidentslist(request):
     return JsonResponse(accidents_list)
 
 @api_view(['GET'])
-def accidentdetail(request,id):
+def accidentdetail(request,pk):
     accident_detail = {}
-    data = list1.objects.filter(pk = id)
+    data = list1.objects.filter(pk = pk)
     accident_detail['list'] = json.loads(serializers.serialize("json", data))
     return JsonResponse(accident_detail)
 
@@ -52,17 +52,17 @@ def addaccident(request):
     if request.method == 'POST':
         if request.POST != '':
             accident = list1()
-            accident.name = request.POST.get('name')
-            accident.address = request.POST.get('address')
-            accident.company_code = request.POST.get('company_code')
-            accident.company_name = request.POST.get('company_name')
-            accident.item = request.POST.get('item')
-            accident.type_code = request.POST.get('type_code')
-            accident.type_name = request.POST.get('type_name')
-            accident.rank_code = request.POST.get('rank_code')
-            accident.rank_name = request.POST.get('rank_name')
-            accident.date = request.POST.get('date')
-            accident.description = request.POST.get('description')
+            accident.name = request.POST.get('name','')
+            accident.address = request.POST.get('address','')
+            accident.company_code = request.POST.get('company_code','')
+            accident.company_name = request.POST.get('company_name','')
+            accident.item = request.POST.get('item','')
+            accident.type_code = request.POST.get('type_code','')
+            accident.type_name = request.POST.get('type_name','')
+            accident.rank_code = request.POST.get('rank_code','')
+            accident.rank_name = request.POST.get('rank_name','')
+            accident.date = request.POST.get('date','')
+            accident.description = request.POST.get('description','')
             accident.save()
             return HttpResponse('新增成功！')
         else:

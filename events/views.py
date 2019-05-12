@@ -41,9 +41,9 @@ def eventslist(request):
     return JsonResponse(events_list)
 
 @api_view(['GET'])
-def eventdetail(request,id):
+def eventdetail(request,pk):
     event_detail = {}
-    data = list2.objects.filter(pk = id)
+    data = list2.objects.filter(pk = pk)
     event_detail['list'] = json.loads(serializers.serialize("json", data))
     return JsonResponse(event_detail)
 # @api_view(['GET'])
@@ -58,14 +58,14 @@ def addevent(request):
     if request.method == 'POST':
         if request.POST != '':
             event = list2()
-            event.name = request.POST.get('name')
-            event.address = request.POST.get('address')
-            event.company_code = request.POST.get('company_code')
-            event.company_name = request.POST.get('company_name')
-            event.type_code = request.POST.get('type_code')
-            event.type_name = request.POST.get('type_name')
-            event.date = request.POST.get('date')
-            event.description = request.POST.get('description')
+            event.name = request.POST.get('name','')
+            event.address = request.POST.get('address','')
+            event.company_code = request.POST.get('company_code','')
+            event.company_name = request.POST.get('company_name','')
+            event.type_code = request.POST.get('type_code','')
+            event.type_name = request.POST.get('type_name','')
+            event.date = request.POST.get('date','')
+            event.description = request.POST.get('description','')
             event.save()
             return HttpResponse('新增成功！')
         else:
