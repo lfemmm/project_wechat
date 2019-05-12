@@ -26,9 +26,15 @@ def login(request):
             # response.set_cookie('password', password,36000)
             request.session['code'] = code
             # response['cookie'] = json.loads(serializers.serialize("json", cookie))
-            return HttpResponse('success')
+            login = {
+                "login_result":"success"
+            }
+            return JsonResponse(login)
         else:
-            messages.add_message(request,messages.WARNING,'用户名或密码错误')
+            login = {
+                "login_result": "fail"
+            }
+            return JsonResponse(login)
     else:
         pass
 
@@ -43,7 +49,10 @@ def logout(request):
     code = request.session.get('code', '')
     if code:
         request.session.flush()
-        return HttpResponse('退出登录')
+        logout = {
+            "logout_result": "success"
+        }
+        return JsonResponse(logout)
     else:
         return HttpResponse('请勿重复退出')
 
