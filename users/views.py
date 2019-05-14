@@ -40,12 +40,6 @@ def login(request):
 
 @api_view(['GET'])
 def logout(request):
-    #(1)
-    # response = HttpResponse('清除成功')  # 改成重定向等都可以
-    # response.delete_cookie('username')
-    # response.delete_cookie('password')
-    # (2)也可采用重定向
-    # return HttpResponseRedirect('/blog')
     code = request.session.get('code', '')
     if code:
         request.session.flush()
@@ -58,14 +52,25 @@ def logout(request):
 
 @api_view(['GET'])
 def userinformation(request):
-    #登录时，应用员工编码加密码，不应该使用用户名
     code = request.session.get('code','')
-    # code = '201822000366'
     if code:
-        information = {}
-        information['data'] = json.loads(serializers.serialize("json", users.objects.filter(code__exact=code)))
-        # information['data'] = json.loads(str(users.objects.filter(code__exact=code).values('name', 'password')))
-        return JsonResponse(information)
+        information = []
+        data =  users.objects.filter(code__exact=code)
+        information.append({
+            'pk':data[0].pk,
+            'code': data[0].code,
+            'name': data[0].name,
+            'sex': data[0].sex,
+            'birthday': data[0].birthday,
+            'company_code': data[0].company_code,
+            'company_name': data[0].company_name,
+            'position': data[0].position,
+            'entrytime': data[0].entrytime,
+            'email': data[0].email,
+            'telephone': data[0].telephone,
+            'password': data[0].password
+        })
+        return JsonResponse(information, safe=False, json_dumps_params={'ensure_ascii': False})
     else:
         return HttpResponse('请重新登录！')
 

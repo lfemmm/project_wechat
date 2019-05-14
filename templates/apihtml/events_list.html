@@ -759,26 +759,25 @@ blockquote {
 </tbody>
 </table>
 <h3 id="5-">5) 请求返回结果:</h3>
-<pre><code>{
-    "<span class="hljs-attribute">page</span>": <span class="hljs-value"><span class="hljs-string">"1"</span></span>,
-    "<span class="hljs-attribute">events_total</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-    "<span class="hljs-attribute">list</span>": <span class="hljs-value">[
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"events.list2"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"20190508事件001"</span></span>,
-                "<span class="hljs-attribute">address</span>": <span class="hljs-value"><span class="hljs-string">"成都"</span></span>,
-                "<span class="hljs-attribute">company_code</span>": <span class="hljs-value"><span class="hljs-string">"000201"</span></span>,
-                "<span class="hljs-attribute">company_name</span>": <span class="hljs-value"><span class="hljs-string">"成都分公司"</span></span>,
-                "<span class="hljs-attribute">type_code</span>": <span class="hljs-value"><span class="hljs-string">"0001"</span></span>,
-                "<span class="hljs-attribute">type_name</span>": <span class="hljs-value"><span class="hljs-string">"意外伤害"</span></span>,
-                "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-08"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"霍敏在实验室打屁"</span>
+<pre><code>[
+    {
+        "<span class="hljs-attribute">page</span>":<span class="hljs-value"><span class="hljs-string">"1"</span></span>,
+        "<span class="hljs-attribute">events_total</span>":<span class="hljs-value"><span class="hljs-number">1</span></span>,
+        "<span class="hljs-attribute">list</span>":<span class="hljs-value">[
+            {
+                "<span class="hljs-attribute">pk</span>":<span class="hljs-value"><span class="hljs-number">1</span></span>,
+                "<span class="hljs-attribute">name</span>":<span class="hljs-value"><span class="hljs-string">"20190508事件001"</span></span>,
+                "<span class="hljs-attribute">address</span>":<span class="hljs-value"><span class="hljs-string">"成都"</span></span>,
+                "<span class="hljs-attribute">company_code</span>":<span class="hljs-value"><span class="hljs-string">"000201"</span></span>,
+                "<span class="hljs-attribute">company_name</span>":<span class="hljs-value"><span class="hljs-string">"成都分公司"</span></span>,
+                "<span class="hljs-attribute">type_code</span>":<span class="hljs-value"><span class="hljs-string">"0001"</span></span>,
+                "<span class="hljs-attribute">type_name</span>":<span class="hljs-value"><span class="hljs-string">"意外伤害"</span></span>,
+                "<span class="hljs-attribute">date</span>":<span class="hljs-value"><span class="hljs-string">"2019-05-08"</span></span>,
+                "<span class="hljs-attribute">description</span>":<span class="hljs-value"><span class="hljs-string">"霍敏在实验室打屁"</span>
             </span>}
-        </span>}
-    ]
-</span>}
+        ]
+    </span>}
+]
 </code></pre><h3 id="6-">6) 请求返回结果参数说明:</h3>
 <table>
 <thead>
@@ -813,21 +812,7 @@ blockquote {
 <td style="text-align:right">-</td>
 </tr>
 <tr>
-<td>model</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">Y</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
 <td>pk</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">Y</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
-<td>fields</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">string</td>
 <td style="text-align:center">Y</td>

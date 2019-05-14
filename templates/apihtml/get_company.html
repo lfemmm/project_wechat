@@ -719,87 +719,47 @@ blockquote {
 <h3 id="5-">5) 请求返回结果:</h3>
 <pre><code>{
     "<span class="hljs-attribute">list</span>": <span class="hljs-value">[
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"company.company"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"00"</span></span>,
-                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"总公司"</span></span>,
-                "<span class="hljs-attribute">parentID</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"公司总部"</span>
+    {
+        "<span class="hljs-attribute">code</span>":<span class="hljs-value"><span class="hljs-string">"00"</span></span>,
+        "<span class="hljs-attribute">name</span>":<span class="hljs-value"><span class="hljs-string">"总公司"</span></span>,
+        "<span class="hljs-attribute">children</span>":<span class="hljs-value">[
+            {
+                "<span class="hljs-attribute">code</span>":<span class="hljs-value"><span class="hljs-string">"0001"</span></span>,
+                "<span class="hljs-attribute">name</span>":<span class="hljs-value"><span class="hljs-string">"东北分公司"</span></span>,
+                "<span class="hljs-attribute">children</span>":<span class="hljs-value">[
+                    {
+                        "<span class="hljs-attribute">code</span>":<span class="hljs-value"><span class="hljs-string">"000101"</span></span>,
+                        "<span class="hljs-attribute">name</span>":<span class="hljs-value"><span class="hljs-string">"辽宁分公司"</span>
+                    </span>}
+                ]
+            </span>},
+            {
+                "<span class="hljs-attribute">code</span>":<span class="hljs-value"><span class="hljs-string">"0002"</span></span>,
+                "<span class="hljs-attribute">name</span>":<span class="hljs-value"><span class="hljs-string">"西南分公司"</span></span>,
+                "<span class="hljs-attribute">children</span>":<span class="hljs-value">[
+                    {
+                        "<span class="hljs-attribute">code</span>":<span class="hljs-value"><span class="hljs-string">"000201"</span></span>,
+                        "<span class="hljs-attribute">name</span>":<span class="hljs-value"><span class="hljs-string">"成都分公司"</span>
+                    </span>},
+                    {
+                        "<span class="hljs-attribute">code</span>":<span class="hljs-value"><span class="hljs-string">"000202"</span></span>,
+                        "<span class="hljs-attribute">name</span>":<span class="hljs-value"><span class="hljs-string">"重庆分公司"</span>
+                    </span>}
+                ]
+            </span>},
+            {
+                "<span class="hljs-attribute">code</span>":<span class="hljs-value"><span class="hljs-string">"0003"</span></span>,
+                "<span class="hljs-attribute">name</span>":<span class="hljs-value"><span class="hljs-string">"华南分公司"</span></span>,
+                "<span class="hljs-attribute">children</span>":<span class="hljs-value">[
+                    {
+                        "<span class="hljs-attribute">code</span>":<span class="hljs-value"><span class="hljs-string">"000301"</span></span>,
+                        "<span class="hljs-attribute">name</span>":<span class="hljs-value"><span class="hljs-string">"深圳分公司"</span>
+                    </span>}
+                ]
             </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"company.company"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"0001"</span></span>,
-                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"东北分公司"</span></span>,
-                "<span class="hljs-attribute">parentID</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
-            </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"company.company"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"0002"</span></span>,
-                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"西南分公司"</span></span>,
-                "<span class="hljs-attribute">parentID</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
-            </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"company.company"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-number">4</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"0003"</span></span>,
-                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"华南分公司"</span></span>,
-                "<span class="hljs-attribute">parentID</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
-            </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"company.company"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"000101"</span></span>,
-                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"辽宁分公司"</span></span>,
-                "<span class="hljs-attribute">parentID</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
-            </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"company.company"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-number">6</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"000201"</span></span>,
-                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"成都分公司"</span></span>,
-                "<span class="hljs-attribute">parentID</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
-            </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"company.company"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-number">7</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"000202"</span></span>,
-                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"重庆分公司"</span></span>,
-                "<span class="hljs-attribute">parentID</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
-            </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"company.company"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-number">8</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"000301"</span></span>,
-                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"深圳分公司"</span></span>,
-                "<span class="hljs-attribute">parentID</span>": <span class="hljs-value"><span class="hljs-number">4</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
-            </span>}
-        </span>}
-    ]
+        ]
+    </span>}
+]
 </span>}
 </code></pre><h3 id="6-">6) 请求返回结果参数说明:</h3>
 <table>
@@ -821,27 +781,6 @@ blockquote {
 <td style="text-align:right">-</td>
 </tr>
 <tr>
-<td>model</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">Y</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
-<td>pk</td>
-<td style="text-align:center">主键</td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">Y</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
-<td>fields</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">Y</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
 <td>code</td>
 <td style="text-align:center">公司编码</td>
 <td style="text-align:center">string</td>
@@ -856,15 +795,8 @@ blockquote {
 <td style="text-align:right">-</td>
 </tr>
 <tr>
-<td>parentID</td>
-<td style="text-align:center">上级公司id</td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">Y</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
-<td>description</td>
-<td style="text-align:center">公司描述</td>
+<td>children</td>
+<td style="text-align:center">子公司</td>
 <td style="text-align:center">string</td>
 <td style="text-align:center">Y</td>
 <td style="text-align:right">-</td>

@@ -752,68 +752,49 @@ blockquote {
 </tbody>
 </table>
 <h3 id="5-">5) 请求返回结果:</h3>
-<pre><code>{
-    "<span class="hljs-attribute">pie_count</span>": <span class="hljs-value">[
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"data_analysis.accident_pie"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">type_name</span>": <span class="hljs-value"><span class="hljs-string">"生产安全事故一般A类"</span></span>,
-                "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+<pre><code>[
+    {
+        "<span class="hljs-attribute">pie_count</span>":<span class="hljs-value">[
+            {
+                "<span class="hljs-attribute">type_code</span>":<span class="hljs-value"><span class="hljs-string">"0001"</span></span>,
+                "<span class="hljs-attribute">type_name</span>":<span class="hljs-value"><span class="hljs-string">"生产安全事故一般A类"</span></span>,
+                "<span class="hljs-attribute">count</span>":<span class="hljs-value"><span class="hljs-number">1</span>
+            </span>},
+            {
+                "<span class="hljs-attribute">type_code</span>":<span class="hljs-value"><span class="hljs-string">"0002"</span></span>,
+                "<span class="hljs-attribute">type_name</span>":<span class="hljs-value"><span class="hljs-string">"生产安全事故一般B类"</span></span>,
+                "<span class="hljs-attribute">count</span>":<span class="hljs-value"><span class="hljs-number">2</span>
+            </span>},
+            {
+                "<span class="hljs-attribute">type_code</span>":<span class="hljs-value"><span class="hljs-string">"0003"</span></span>,
+                "<span class="hljs-attribute">type_name</span>":<span class="hljs-value"><span class="hljs-string">"生产安全事故一般C类"</span></span>,
+                "<span class="hljs-attribute">count</span>":<span class="hljs-value"><span class="hljs-number">1</span>
+            </span>},
+            {
+                "<span class="hljs-attribute">type_code</span>":<span class="hljs-value"><span class="hljs-string">"0004"</span></span>,
+                "<span class="hljs-attribute">type_name</span>":<span class="hljs-value"><span class="hljs-string">"生产安全事故一般D类"</span></span>,
+                "<span class="hljs-attribute">count</span>":<span class="hljs-value"><span class="hljs-number">0</span>
             </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"data_analysis.accident_pie"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">type_name</span>": <span class="hljs-value"><span class="hljs-string">"生产安全事故一般B类"</span></span>,
-                "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">2</span>
+        ]</span>,
+        "<span class="hljs-attribute">bar_count</span>":<span class="hljs-value">[
+            {
+                "<span class="hljs-attribute">company_code</span>":<span class="hljs-value"><span class="hljs-string">"0002"</span></span>,
+                "<span class="hljs-attribute">company_name</span>":<span class="hljs-value"><span class="hljs-string">"西南分公司"</span></span>,
+                "<span class="hljs-attribute">count</span>":<span class="hljs-value"><span class="hljs-number">4</span>
+            </span>},
+            {
+                "<span class="hljs-attribute">company_code</span>":<span class="hljs-value"><span class="hljs-string">"000201"</span></span>,
+                "<span class="hljs-attribute">company_name</span>":<span class="hljs-value"><span class="hljs-string">"成都分公司"</span></span>,
+                "<span class="hljs-attribute">count</span>":<span class="hljs-value"><span class="hljs-number">3</span>
+            </span>},
+            {
+                "<span class="hljs-attribute">company_code</span>":<span class="hljs-value"><span class="hljs-string">"000202"</span></span>,
+                "<span class="hljs-attribute">company_name</span>":<span class="hljs-value"><span class="hljs-string">"重庆分公司"</span></span>,
+                "<span class="hljs-attribute">count</span>":<span class="hljs-value"><span class="hljs-number">1</span>
             </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"data_analysis.accident_pie"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">type_name</span>": <span class="hljs-value"><span class="hljs-string">"生产安全事故一般C类"</span></span>,
-                "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">1</span>
-            </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"data_analysis.accident_pie"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">type_name</span>": <span class="hljs-value"><span class="hljs-string">"生产安全事故一般D类"</span></span>,
-                "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">0</span>
-            </span>}
-        </span>}
-    ]</span>,
-    "<span class="hljs-attribute">bar_count</span>": <span class="hljs-value">[
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"data_analysis.accident_bar"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">company_name</span>": <span class="hljs-value"><span class="hljs-string">"西南分公司"</span></span>,
-                "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">4</span>
-            </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"data_analysis.accident_bar"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">company_name</span>": <span class="hljs-value"><span class="hljs-string">"成都分公司"</span></span>,
-                "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">3</span>
-            </span>}
-        </span>},
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"data_analysis.accident_bar"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">company_name</span>": <span class="hljs-value"><span class="hljs-string">"重庆分公司"</span></span>,
-                "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">1</span>
-            </span>}
-        </span>}
-    ]
-</span>}
+        ]
+    </span>}
+]
 </code></pre><h3 id="6-">6) 请求返回结果参数说明:</h3>
 <table>
 <thead>
@@ -834,22 +815,8 @@ blockquote {
 <td style="text-align:right">-</td>
 </tr>
 <tr>
-<td>model</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">Y</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
-<td>pk</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">Y</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
-<td>fields</td>
-<td style="text-align:center"></td>
+<td>type_code</td>
+<td style="text-align:center">事故类别编码</td>
 <td style="text-align:center">string</td>
 <td style="text-align:center">Y</td>
 <td style="text-align:right">-</td>
@@ -871,6 +838,13 @@ blockquote {
 <tr>
 <td>bar_count</td>
 <td style="text-align:center">柱状图数据</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:right">-</td>
+</tr>
+<tr>
+<td>company_code</td>
+<td style="text-align:center">公司编码</td>
 <td style="text-align:center">string</td>
 <td style="text-align:center">Y</td>
 <td style="text-align:right">-</td>

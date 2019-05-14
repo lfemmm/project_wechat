@@ -766,29 +766,28 @@ blockquote {
 </tbody>
 </table>
 <h3 id="5-">5) 请求返回结果:</h3>
-<pre><code>{
-    "<span class="hljs-attribute">page</span>": <span class="hljs-value"><span class="hljs-string">"1"</span></span>,
-    "<span class="hljs-attribute">accidents_total</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-    "<span class="hljs-attribute">list</span>": <span class="hljs-value">[
-        {
-            "<span class="hljs-attribute">model</span>": <span class="hljs-value"><span class="hljs-string">"accidents.list1"</span></span>,
-            "<span class="hljs-attribute">pk</span>": <span class="hljs-value"><span class="hljs-number">4</span></span>,
-            "<span class="hljs-attribute">fields</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"20190509事故002"</span></span>,
-                "<span class="hljs-attribute">address</span>": <span class="hljs-value"><span class="hljs-string">"成都"</span></span>,
-                "<span class="hljs-attribute">company_code</span>": <span class="hljs-value"><span class="hljs-string">"000201"</span></span>,
-                "<span class="hljs-attribute">company_name</span>": <span class="hljs-value"><span class="hljs-string">"成都分公司"</span></span>,
-                "<span class="hljs-attribute">item</span>": <span class="hljs-value"><span class="hljs-string">"检查安全隐患"</span></span>,
-                "<span class="hljs-attribute">type_code</span>": <span class="hljs-value"><span class="hljs-string">"0002"</span></span>,
-                "<span class="hljs-attribute">type_name</span>": <span class="hljs-value"><span class="hljs-string">"生产安全事故一般B类"</span></span>,
-                "<span class="hljs-attribute">rank_code</span>": <span class="hljs-value"><span class="hljs-string">"0003"</span></span>,
-                "<span class="hljs-attribute">rank_name</span>": <span class="hljs-value"><span class="hljs-string">"较大事故"</span></span>,
-                "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-09"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
+<pre><code>[
+    {
+        "<span class="hljs-attribute">page</span>":<span class="hljs-value"><span class="hljs-string">"1"</span></span>,
+        "<span class="hljs-attribute">accidents_total</span>":<span class="hljs-value"><span class="hljs-number">1</span></span>,
+        "<span class="hljs-attribute">list</span>":<span class="hljs-value">[
+            {
+                "<span class="hljs-attribute">pk</span>":<span class="hljs-value"><span class="hljs-number">4</span></span>,
+                "<span class="hljs-attribute">name</span>":<span class="hljs-value"><span class="hljs-string">"20190509事故002"</span></span>,
+                "<span class="hljs-attribute">address</span>":<span class="hljs-value"><span class="hljs-string">"成都"</span></span>,
+                "<span class="hljs-attribute">company_code</span>":<span class="hljs-value"><span class="hljs-string">"000201"</span></span>,
+                "<span class="hljs-attribute">company_name</span>":<span class="hljs-value"><span class="hljs-string">"成都分公司"</span></span>,
+                "<span class="hljs-attribute">item</span>":<span class="hljs-value"><span class="hljs-string">"检查安全隐患"</span></span>,
+                "<span class="hljs-attribute">type_code</span>":<span class="hljs-value"><span class="hljs-string">"0002"</span></span>,
+                "<span class="hljs-attribute">type_name</span>":<span class="hljs-value"><span class="hljs-string">"生产安全事故一般B类"</span></span>,
+                "<span class="hljs-attribute">rank_code</span>":<span class="hljs-value"><span class="hljs-string">"0003"</span></span>,
+                "<span class="hljs-attribute">rank_name</span>":<span class="hljs-value"><span class="hljs-string">"较大事故"</span></span>,
+                "<span class="hljs-attribute">date</span>":<span class="hljs-value"><span class="hljs-string">"2019-05-09"</span></span>,
+                "<span class="hljs-attribute">description</span>":<span class="hljs-value"><span class="hljs-literal">null</span>
             </span>}
-        </span>}
-    ]
-</span>}
+        ]
+    </span>}
+]
 </code></pre><h3 id="6-">6) 请求返回结果参数说明:</h3>
 <table>
 <thead>
@@ -823,22 +822,8 @@ blockquote {
 <td style="text-align:right">-</td>
 </tr>
 <tr>
-<td>model</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">Y</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
 <td>pk</td>
 <td style="text-align:center">主键（id）</td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">Y</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
-<td>fields</td>
-<td style="text-align:center"></td>
 <td style="text-align:center">string</td>
 <td style="text-align:center">Y</td>
 <td style="text-align:right">-</td>

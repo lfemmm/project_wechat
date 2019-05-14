@@ -12,7 +12,7 @@ from events.models import list2, type2
 
 @api_view(['GET'])
 def eventslist(request):
-    events_list = {}
+    events_list = []
     if request.method =='GET':
         type_code = request.GET.get('type_code', '00')
         startdate = request.GET.get('startdate', '1900-01-01')
@@ -32,20 +32,46 @@ def eventslist(request):
             # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
             data = paginator.page(paginator.num_pages)
     if request.GET.get('page'):
-        events_list['page'] = request.GET.get('page')
+        # events_list['page'] = request.GET.get('page')
+        events_list.append({'page': request.GET.get('page'), 'events_total': len(data),'list':[]})
     else:
-        events_list['page'] = 1
-    total = len(data)
-    events_list['events_total'] = total
-    events_list['list'] = json.loads(serializers.serialize("json", data))
-    return JsonResponse(events_list)
+        # events_list['page'] = 1
+        events_list.append({'page':1,'events_total':len(data),'list':[]})
+    for i in range(0,len(events_list)):
+        for d in data:
+            events_list[i]['list'].append({
+                'pk':d.pk,
+                'name' : d.name,
+                'address' : d.address,
+                'company_code' : d.company_code,
+                'company_name' : d.company_name,
+                'type_code' : d.type_code,
+                'type_name' : d.type_name,
+                'date' : d.date,
+                'description' : d.description
+            })
+    # events_list['events_total'] = len(data)
+    # events_list['list'] = json.loads(serializers.serialize("json", data))
+    # return JsonResponse(events_list)
+    return JsonResponse(events_list, safe=False, json_dumps_params={'ensure_ascii': False})
 
 @api_view(['GET'])
 def eventdetail(request,pk):
-    event_detail = {}
+    event_detail = []
     data = list2.objects.filter(pk = pk)
-    event_detail['list'] = json.loads(serializers.serialize("json", data))
-    return JsonResponse(event_detail)
+    event_detail.append({
+        'pk': data[0].pk,
+        'name': data[0].name,
+        'address': data[0].address,
+        'company_code': data[0].company_code,
+        'company_name': data[0].company_name,
+        'type_code': data[0].type_code,
+        'type_name': data[0].type_name,
+        'date': data[0].date,
+        'description': data[0].description
+    })
+    # event_detail['list'] = json.loads(serializers.serialize("json", data))
+    return JsonResponse(event_detail, safe=False, json_dumps_params={'ensure_ascii': False})
 # @api_view(['GET'])
 # def eventdetail(request):
 #     event_detail = {}
@@ -75,8 +101,9 @@ def addevent(request):
 
 @api_view(['GET'])  #查询事件类别
 def typeslist(request):
-    types_list = {}
+    types_list = []
     if request.method == 'GET':
         data = type2.objects.all()
-    types_list['list'] = json.loads(serializers.serialize("json", data))
-    return JsonResponse(types_list)
+    for d in data:
+        types_list.append({'pk':d.pk,'code':d.code,'name':d.name})
+    return JsonResponse(types_list, safe=False, json_dumps_params={'ensure_ascii': False})
