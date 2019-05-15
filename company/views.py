@@ -1,13 +1,13 @@
-from django.core import serializers
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
 
 # Create your views here.
 from rest_framework.decorators import api_view
-from rest_framework.utils import json
-
 from company.models import company
 
+import logging
+logger = logging.getLogger(__name__)
+
+logger.info('------ save_models--------')
 
 @api_view(['GET'])
 def companylist(request):

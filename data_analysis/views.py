@@ -1,24 +1,24 @@
-
-from django.core import serializers
 from django.db.models import Q
 from django.http import JsonResponse
 
 # Create your views here.
 from rest_framework.decorators import api_view
-from rest_framework.utils import json
 
 from accidents.models import list1, type1
 from company.models import company
-from data_analysis.models import accident_pie, accident_bar, event_pie, event_bar
 from events.models import list2, type2
 
+import logging
+logger = logging.getLogger(__name__)
+
+logger.info('------ save_models--------')
 
 @api_view(['GET'])  #传开始时间、结束时间、事故单位，统计各类别事故
 def accident_echart(request):
     startdate = request.GET.get('startdate','1900-01-01')
     enddate = request.GET.get('enddate','2099-12-30')
     companycode = request.GET.get('companycode','00')
-    data = []
+    data = {}
 #获取饼状图数据
     pie = []
     accidents = type1.objects.all()
@@ -42,9 +42,9 @@ def accident_echart(request):
     #     bar.append(accidents_bar)
         bar.append({'company_code':c.code,'company_name':c.name,'count':list1.objects.filter(company_code__startswith=
                                                        c.code,date__gte=startdate, date__lte=enddate).count()})
-    data.append({'pie_count':pie,'bar_count':bar})
-    # data['pie_count'] = json.loads(serializers.serialize("json", pie))
-    # data['bar_count'] = json.loads(serializers.serialize("json", bar))
+    # data.append({'pie_count':pie,'bar_count':bar})
+    data['pie_count'] = pie
+    data['bar_count'] = bar
     # return JsonResponse(data)
     return JsonResponse(data, safe=False, json_dumps_params={'ensure_ascii': False})
 
@@ -52,7 +52,7 @@ def event_echart(request):
     startdate = request.GET.get('startdate', '1900-01-01')
     enddate = request.GET.get('enddate', '2099-12-30')
     companycode = request.GET.get('companycode', '00')
-    data = []
+    data = {}
     # 获取饼状图数据
     pie = []
     events = type2.objects.all()
@@ -75,7 +75,9 @@ def event_echart(request):
         # bar.append(events_bar)
         bar.append({'company_code': c.code, 'company_name': c.name, 'count': list2.objects.filter(company_code__startswith
                     =c.code,date__gte=startdate, date__lte=enddate).count()})
-    data.append({'pie_count': pie, 'bar_count': bar})
+    # data.append({'pie_count': pie, 'bar_count': bar})
+    data['pie_count'] = pie
+    data['bar_count'] = bar
     return JsonResponse(data, safe=False, json_dumps_params={'ensure_ascii': False})
     # data['pie_count'] = json.loads(serializers.serialize("json", pie))
     # data['bar_count'] = json.loads(serializers.serialize("json", bar))

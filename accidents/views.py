@@ -1,16 +1,19 @@
-from django.core import serializers
 from django.core.paginator import Paginator, PageNotAnInteger, InvalidPage, EmptyPage
 from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
 from rest_framework.decorators import api_view
-from rest_framework.utils import json
 
 from accidents.models import list1, type1, rank1
 
+import logging
+logger = logging.getLogger(__name__)
+
+logger.info('------ save_models--------')
+
 @api_view(['GET'])
 def accidentslist(request):
-    accidents_list = []
+    accidents_list = {}
     if request.method =='GET':
         type_code = request.GET.get('type_code','00')
         rank_code = request.GET.get('rank_code','00')
@@ -32,28 +35,30 @@ def accidentslist(request):
             # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
             data = paginator.page(paginator.num_pages)
     if request.GET.get('page'):
-        # accidents_list['page'] = request.GET.get('page')
-        accidents_list.append({'page': request.GET.get('page'), 'accidents_total': len(data), 'list': []})
+        accidents_list['page'] = request.GET.get('page')
+        # accidents_list.append({'page': request.GET.get('page'), 'accidents_total': len(data), 'list': []})
     else:
-        # accidents_list['page'] = 1
-        accidents_list.append({'page': 1, 'accidents_total': len(data), 'list': []})
-    for i in range(0,len(accidents_list)):
+        accidents_list['page'] = 1
+        # accidents_list.append({'page': 1, 'accidents_total': len(data), 'list': []})
+    list = []
+    for i in range(0, len(accidents_list)):
         for d in data:
-            accidents_list[i]['list'].append({
-                'pk':d.pk,
-                'name' : d.name,
-                'address' : d.address,
-                'company_code' : d.company_code,
-                'company_name' : d.company_name,
-                'item':d.item,
-                'type_code' : d.type_code,
-                'type_name' : d.type_name,
-                'rank_code':d.rank_code,
-                'rank_name':d.rank_name,
-                'date' : d.date,
-                'description' : d.description
+            list.append({
+                'pk': d.pk,
+                'name': d.name,
+                'address': d.address,
+                'company_code': d.company_code,
+                'company_name': d.company_name,
+                'item': d.item,
+                'type_code': d.type_code,
+                'type_name': d.type_name,
+                'rank_code': d.rank_code,
+                'rank_name': d.rank_name,
+                'date': d.date,
+                'description': d.description
             })
-    # accidents_list['accidents_total'] = len(data)
+    accidents_list['accidents_total'] = len(data)
+    accidents_list['list'] = list
     # accidents_list['list'] = json.loads(serializers.serialize("json", data))
     # return JsonResponse(accidents_list)
     return JsonResponse(accidents_list, safe=False, json_dumps_params={'ensure_ascii': False})

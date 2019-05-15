@@ -1,18 +1,19 @@
-from django.core import serializers
 from django.core.paginator import Paginator, PageNotAnInteger, InvalidPage, EmptyPage
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
 
 # Create your views here.
 from rest_framework.decorators import api_view
-from rest_framework.utils import json
 
 from events.models import list2, type2
 
+import logging
+logger = logging.getLogger(__name__)
+
+logger.info('------ save_models--------')
 
 @api_view(['GET'])
 def eventslist(request):
-    events_list = []
+    events_list = {}
     if request.method =='GET':
         type_code = request.GET.get('type_code', '00')
         startdate = request.GET.get('startdate', '1900-01-01')
@@ -32,14 +33,15 @@ def eventslist(request):
             # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
             data = paginator.page(paginator.num_pages)
     if request.GET.get('page'):
-        # events_list['page'] = request.GET.get('page')
-        events_list.append({'page': request.GET.get('page'), 'events_total': len(data),'list':[]})
+        events_list['page'] = request.GET.get('page')
+        # events_list.append({'page': request.GET.get('page'), 'events_total': len(data),'list':[]})
     else:
-        # events_list['page'] = 1
-        events_list.append({'page':1,'events_total':len(data),'list':[]})
+        events_list['page'] = 1
+        # events_list.append({'page':1,'events_total':len(data),'list':[]})
+    list = []
     for i in range(0,len(events_list)):
         for d in data:
-            events_list[i]['list'].append({
+            list.append({
                 'pk':d.pk,
                 'name' : d.name,
                 'address' : d.address,
@@ -50,7 +52,8 @@ def eventslist(request):
                 'date' : d.date,
                 'description' : d.description
             })
-    # events_list['events_total'] = len(data)
+    events_list['events_total'] = len(data)
+    events_list['list'] = list
     # events_list['list'] = json.loads(serializers.serialize("json", data))
     # return JsonResponse(events_list)
     return JsonResponse(events_list, safe=False, json_dumps_params={'ensure_ascii': False})

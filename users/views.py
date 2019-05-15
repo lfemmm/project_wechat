@@ -1,13 +1,15 @@
-from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
-from django.contrib import  messages
 from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework.decorators import api_view
-from rest_framework.utils import json
+
 from users.models import users
 
+import logging
+logger = logging.getLogger(__name__)
+
+logger.info('------ save_models--------')
 
 @ensure_csrf_cookie
 @api_view(['POST'])
