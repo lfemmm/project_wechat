@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 logger.info('------ save_models--------')
 
-@ensure_csrf_cookie
+# @ensure_csrf_cookie
 @api_view(['POST'])
 def login(request):
     code = request.POST.get('code')

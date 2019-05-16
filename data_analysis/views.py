@@ -18,67 +18,77 @@ def accident_echart(request):
     startdate = request.GET.get('startdate','1900-01-01')
     enddate = request.GET.get('enddate','2099-12-30')
     companycode = request.GET.get('companycode','00')
+    if companycode == '':
+        companycode = '00'
     data = {}
-#获取饼状图数据
     pie = []
-    accidents = type1.objects.all()
-    for t in accidents:
-        # accidents_pie = accident_pie()
-        # accidents_pie.type_name = t.name
-        # accidents_pie.count = list1.objects.filter(type_name__exact=t.name, company_code__startswith =companycode,
-        #                                            date__gte=startdate,date__lte=enddate).count()
-        # pie.append(accidents_pie)
-        pie.append({'type_code':t.code,'type_name':t.name,'count':list1.objects.filter(type_name__exact=t.name,
-                    company_code__startswith =companycode,date__gte=startdate,date__lte=enddate).count()})
-#获取柱状图数据
     bar = []
+    accidents = list1.objects.filter(company_code__startswith =companycode,date__gte=startdate,date__lte=enddate).order_by('type_code')
     companys = company.objects.filter(Q(parentID__code__exact=companycode) | Q(code__exact=companycode))
+    types = type1.objects.all()
+    typelists = []
+    company_names = []
+    for t in types:
+        typelists.append(t.name)
+    # for a in accidents:
+    #     typelists.append(a.type_name)
     for c in companys:
-    #     accidents_bar = accident_bar()
-    #     accidents_bar.company_name = c.name
-    #     print(accidents_bar.company_name)
-    #     accidents_bar.count = list1.objects.filter(company_code__startswith=c.code,
-    #                                                    date__gte=startdate, date__lte=enddate).count()
-    #     bar.append(accidents_bar)
-        bar.append({'company_code':c.code,'company_name':c.name,'count':list1.objects.filter(company_code__startswith=
-                                                       c.code,date__gte=startdate, date__lte=enddate).count()})
-    # data.append({'pie_count':pie,'bar_count':bar})
+        company_names.append(c.name)
+    # typelists = list(set(typelists))
+    for t in typelists:
+        type_code = type1.objects.get(name__exact=t).code
+        count = accidents.filter(type_name__exact=t,company_code__startswith =companycode,date__gte=startdate,date__lte=enddate).count()
+        if count == 0:
+            pass
+        else:
+            pie.append({'type_code': type_code, 'type_name': t, 'count': count})
+    for c in company_names:
+        company_code = companys.get(name__exact=c).code
+        count = accidents.filter(company_code__startswith=company_code,date__gte=startdate, date__lte=enddate).count()
+        if count == 0:
+            pass
+        else:
+            bar.append({'company_code':company_code,'company_name':c,'count':count})
     data['pie_count'] = pie
     data['bar_count'] = bar
-    # return JsonResponse(data)
     return JsonResponse(data, safe=False, json_dumps_params={'ensure_ascii': False})
 
+@api_view(['GET'])
 def event_echart(request):
     startdate = request.GET.get('startdate', '1900-01-01')
     enddate = request.GET.get('enddate', '2099-12-30')
     companycode = request.GET.get('companycode', '00')
+    if companycode == '':
+        companycode = '00'
     data = {}
-    # 获取饼状图数据
     pie = []
-    events = type2.objects.all()
-    for t in events:
-        # events_pie = event_pie()
-        # events_pie.type_name = t.name
-        # events_pie.count = list2.objects.filter(type_name__exact=t.name, company_code__startswith=companycode,
-        #                                            date__gte=startdate,date__lte=enddate).count()
-        # pie.append(events_pie)
-        pie.append({'type_code': t.code, 'type_name': t.name, 'count': list2.objects.filter(type_name__exact=t.name,
-                    company_code__startswith=companycode,date__gte=startdate,date__lte=enddate).count()})
-# 获取柱状图数据
     bar = []
+    events = list2.objects.filter(company_code__startswith=companycode,date__gte=startdate,date__lte=enddate).order_by('type_code')
     companys = company.objects.filter(Q(parentID__code__exact=companycode) | Q(code__exact=companycode))
+    types = type2.objects.all()
+    typelists = []
+    company_names = []
+    for t in types:
+        typelists.append(t.name)
+    # for e in events:
+    #     typelists.append(e.type_name)
     for c in companys:
-        # events_bar = event_bar()
-        # events_bar.company_name = c.name
-        # events_bar.count = list2.objects.filter(company_code__startswith=c.code,
-        #                                            date__gte=startdate, date__lte=enddate).count()
-        # bar.append(events_bar)
-        bar.append({'company_code': c.code, 'company_name': c.name, 'count': list2.objects.filter(company_code__startswith
-                    =c.code,date__gte=startdate, date__lte=enddate).count()})
-    # data.append({'pie_count': pie, 'bar_count': bar})
+        company_names.append(c.name)
+    # typelists = list(set(typelists))
+    for t in typelists:
+        type_code = type2.objects.get(name__exact=t).code
+        count = events.filter(type_name__exact=t,company_code__startswith=companycode,date__gte=startdate,date__lte=enddate).count()
+        if count == 0:
+            pass
+        else:
+            pie.append({'type_code': type_code, 'type_name': t, 'count': count})
+    for c in company_names:
+        company_code = companys.get(name__exact=c).code
+        count = events.filter(company_code__startswith=company_code,date__gte=startdate, date__lte=enddate).count()
+        if count == 0:
+            pass
+        else:
+            bar.append({'company_code': company_code, 'company_name': c, 'count': count})
     data['pie_count'] = pie
     data['bar_count'] = bar
     return JsonResponse(data, safe=False, json_dumps_params={'ensure_ascii': False})
-    # data['pie_count'] = json.loads(serializers.serialize("json", pie))
-    # data['bar_count'] = json.loads(serializers.serialize("json", bar))
-    # return JsonResponse(data)
